@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的艺考合格证 - 流白艺考</title>
+    <link rel="stylesheet" type="text/css" href="static/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <div id="before">
+      <img id="bg" src="static/images/bg.jpg" onload="bgOnload()">
+      <div id="button" class="button" onclick="start()">
+        <div id="loader" class="pacman"><div></div><div></div><div></div><div></div><div></div></div>
+        <span id="button-title">抽取合格证</span>
+      </div>
+    </div>
+    <div id="after">
+      <img id="certificate" usemap="#back" onload="imageLoaded()" onerror="start()">
+      <div id="tips">
+        <span id="tip-1">恭喜你！快分享到你的朋友圈吧！</span>
+        <small id="tip-2">小提示：点击右上角分享或点击图片保存，然后再试一次！</small>
+      </div>
+
+      <map name="back" id="back">
+        <area
+          id="area"
+          shape="circle"
+          coords="0,0,80"
+          href ="#"
+          onclick="back()"
+          alt="Back" />
+      </map>
+    </div>
+    <script type="text/javascript">
+      function getRandomInt (max) {
+        return Math.floor(Math.random() * Math.floor(max))
+      }
+      const ratio = 320 / 502.78 // width / height
+      const { availWidth, availHeight } = window.screen
+      const beforeDOM = document.getElementById('before')
+      const bgDOM = document.getElementById('bg')
+      const width = availWidth > availHeight ? availHeight * ratio : availWidth
+      const height = availWidth > availHeight ? availHeight : availWidth / ratio
+      bgDOM.style.width = width + 'px'
+      bgDOM.style.height = height + 'px'
+      const afterDOM = document.getElementById('after')
+      const buttonDOM = document.getElementById('button')
+      buttonDOM.style.top = height * 0.89 + 'px'
+      const areaDOM = document.getElementById('area')
+      areaDOM.setAttribute('coords', `0, 0, ${(0.8 * availHeight)*ratio/5}`)
+      const loaderDOM = document.getElementById('loader')
+      const btnTitleDOM = document.getElementById('button-title')
+      const certificateDOM = document.getElementById('certificate')
+      const tipsDOM = document.getElementById('tips')
+      const tip1DOM = document.getElementById('tip-1')
+      const tip2DOM = document.getElementById('tip-2')
+
+      const single = []
+      function bgOnload () {
+        document.body.style.backgroundColor = '#ffc284'
+      }
+      function start () {
+        buttonDOM.className = 'button disabled'
+        loaderDOM.style.display = 'block'
+        btnTitleDOM.innerHTML = '正在抽取你的合格证'
+        const randInt = getRandomInt(100)
+        let imageURL
+        if (randInt > 96) {
+          imageURL = `./static/images/s${getRandomInt(3)+1}.png`
+          tip1DOM.innerHTML = '恭喜你！获得考神卡！'
+          tip2DOM.innerHTML = '小提示：请点击图片保存并分享到朋友圈，截图后发送给流白艺考公众号，获取考神福利！'
+        } else {
+          imageURL = `./static/images/c${getRandomInt(56)+1}.png`
+        }
+        certificateDOM.setAttribute('src', imageURL)
+      }
+      function imageLoaded () {
+        beforeDOM.style.display = 'none'
+        afterDOM.style.display = 'flex'
+        tipsDOM.style.display = 'flex'
+      }
+      function back() {
+        buttonDOM.className = 'button'
+        loaderDOM.style.display = 'none'
+        btnTitleDOM.innerHTML = '抽取合格证'
+        beforeDOM.style.display = 'flex'
+        afterDOM.style.display = 'none'
+        tipsDOM.style.display = 'none'
+      }
+    </script>
+  </body>
+</html>
