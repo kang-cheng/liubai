@@ -58,7 +58,12 @@
       const tip1DOM = document.getElementById('tip-1')
       const tip2DOM = document.getElementById('tip-2')
 
-      const single = []
+      const single1 = [52, 53, 54]
+      const single2 = [55, 56]
+      const double = [1, 4, 5, 8, 11, 12, 13, 19, 20, 21, 22, 28, 29, 30, 31, 38, 39, 40, 41, ]
+      const triple = [2, 6, 9, 14, 15, 23, 24, 25, 32, 33, 34, 42, 43, 44, 45, 46, 47,   ]
+      const quadra = [3, 7, 10, 16, 17, 18, 26, 27, 35, 36, 37, 48, 49, 50, 51, ]
+      const penta = [57, 58, 59]
       function bgOnload () {
         document.body.style.backgroundColor = '#ffc284'
       }
@@ -66,14 +71,37 @@
         buttonDOM.className = 'button disabled'
         loaderDOM.style.display = 'block'
         btnTitleDOM.innerHTML = '正在抽取你的合格证'
-        const randInt = getRandomInt(100)
         let imageURL
-        if (randInt > 96) {
-          imageURL = `./static/images/s${getRandomInt(3)+1}.png`
-          tip1DOM.innerHTML = '恭喜你！获得考神卡！'
-          tip2DOM.innerHTML = '小提示：请点击图片保存并分享到朋友圈，截图后发送给流白艺考公众号，获取考神福利！'
+
+        // 30, 25, 20, 15, 10
+        const r1 = getRandomInt(100)
+        if (r1 < 30) {
+          const r2 = getRandomInt(70)
+          if (r2 < 30) {
+            imageURL = `./static/images/c${single1[getRandomInt(single1.length)]}.png`
+          } else {
+            imageURL = `./static/images/c${single2[getRandomInt(single2.length)]}.png`
+          }
+          tip1DOM.innerHTML = '恭喜你！获得一张合格证！'
+        } else if (r1 < 55) {
+          imageURL = `./static/images/c${double[getRandomInt(double.length)]}.png`
+          tip1DOM.innerHTML = '恭喜你！获得两张合格证！'
+        } else if (r1 < 75) {
+          imageURL = `./static/images/c${triple[getRandomInt(triple.length)]}.png`
+          tip1DOM.innerHTML = '恭喜你！获得三证卡！'
+        } else if (r1 < 90) {
+          imageURL = `./static/images/c${quadra[getRandomInt(quadra.length)]}.png`
+          tip1DOM.innerHTML = '恭喜你！获得四证卡！再接再厉！'
         } else {
-          imageURL = `./static/images/c${getRandomInt(56)+1}.png`
+          const r2 = getRandomInt(100)
+          if (r2 < 50) {
+            imageURL = `./static/images/c${penta[getRandomInt(penta.length)]}.png`
+            tip1DOM.innerHTML = '恭喜你！获得五证卡！距离考神还差一步！'
+          } else {
+            imageURL = `./static/images/god.png`
+            tip1DOM.innerHTML = '恭喜你！获得考神卡！'
+            tip2DOM.innerHTML = '小提示：请点击图片保存并分享到朋友圈，截图后发送给流白艺考公众号，获取考神福利！'
+          }
         }
         certificateDOM.setAttribute('src', imageURL)
       }
@@ -81,6 +109,7 @@
         beforeDOM.style.display = 'none'
         afterDOM.style.display = 'flex'
         tipsDOM.style.display = 'flex'
+        document.body.style.backgroundColor = '#fff'
       }
       function back() {
         buttonDOM.className = 'button'
@@ -89,6 +118,7 @@
         beforeDOM.style.display = 'flex'
         afterDOM.style.display = 'none'
         tipsDOM.style.display = 'none'
+        document.body.style.backgroundColor = '#ffc284'
       }
     </script>
   </body>
