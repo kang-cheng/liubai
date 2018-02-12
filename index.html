@@ -20,8 +20,8 @@
     <div id="after">
       <img id="certificate" usemap="#back" onload="imageLoaded()" onerror="start()">
       <div id="tips">
-        <span id="tip-1">恭喜你！快分享到你的朋友圈吧！</span>
-        <small id="tip-2">小提示：点击右上角分享或点击图片保存，然后再试一次！</small>
+        <span id="tip-1">恭喜你！</span>
+        <small id="tip-2">小提示：点击图片保存到本地让好运更持久，然后再试一次！</small>
       </div>
 
       <map name="back" id="back">
@@ -100,7 +100,7 @@
           } else {
             imageURL = `./static/images/god.png`
             tip1DOM.innerHTML = '恭喜你！获得考神卡！'
-            tip2DOM.innerHTML = '小提示：请点击图片保存并分享到朋友圈，截图后发送给流白艺考公众号，获取考神福利！'
+            tip2DOM.innerHTML = '小提示：请点击图片保存好运并截图发送给流白艺考公众号，获取考神福利！'
           }
         }
         certificateDOM.setAttribute('src', imageURL)
